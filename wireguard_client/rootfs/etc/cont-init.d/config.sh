@@ -213,4 +213,3 @@ for peer in $(bashio::config 'peers|keys'); do
 done
 
 bashio::log.info "Ended to write Wireguard configuration into: [${config}]"
-```
