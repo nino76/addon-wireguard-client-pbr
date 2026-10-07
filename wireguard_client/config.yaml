@@ -55,6 +55,7 @@ schema:
     post_up: str?
     post_down: str?
     mtu: int
+    table: str?
   peers:
     - public_key: str?
       pre_shared_key: str?
