@@ -1,3 +1,4 @@
+```bash
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Home Assistant Third Party Add-on: WireGuard Client
@@ -15,6 +16,7 @@ declare peer_public_key
 declare post_down
 declare post_up
 declare mtu
+declare table
 declare pre_shared_key
 declare peer_index
 
@@ -113,6 +115,12 @@ if bashio::config.has_value 'interface.mtu'; then
     echo "MTU = ${mtu}" >> "${config}"
 fi
 
+# Check if custom routing table value
+if bashio::config.has_value 'interface.table'; then
+    table=$(bashio::config 'interface.table')
+    echo "Table = ${table}" >> "${config}"
+fi
+
 # Status API Storage
 if ! bashio::fs.directory_exists '/var/lib/wireguard'; then
     mkdir -p /var/lib/wireguard \
@@ -146,7 +154,7 @@ for peer in $(bashio::config 'peers|keys'); do
 
     # Check if pre_shared key value and if true get the peer pre_shared key
     pre_shared_key=""
-    if  bashio::config.has_value "peers[${peer}].pre_shared_key"; then
+    if bashio::config.has_value "peers[${peer}].pre_shared_key"; then
         pre_shared_key=$(bashio::config "peers[${peer}].pre_shared_key")
     fi
 
@@ -206,3 +214,4 @@ for peer in $(bashio::config 'peers|keys'); do
 done
 
 bashio::log.info "Ended to write Wireguard configuration into: [${config}]"
+```
