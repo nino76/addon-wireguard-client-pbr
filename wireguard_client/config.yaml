@@ -75,4 +75,3 @@ schema:
     handshake_threshold: int?
     max_failures: int?
     revert_interval: int?
-image: "bigmoby/{arch}-addon-wireguard-client"
