@@ -1,4 +1,3 @@
-```bash
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Home Assistant Third Party Add-on: WireGuard Client
